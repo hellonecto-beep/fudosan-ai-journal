@@ -1,0 +1,477 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+import Header from '../components/Header.astro';
+import { getCollection } from 'astro:content';
+
+type Heading = { depth: number; slug: string; text: string };
+type Props = CollectionEntry<'blog'>['data'] & {
+	currentSlug?: string;
+	headings?: Heading[];
+};
+
+const {
+	title,
+	meta_description,
+	published_date,
+	author,
+	supervisor,
+	content_type,
+	images,
+	currentSlug,
+	headings = [],
+} = Astro.props;
+
+const hero = images?.find((i) => i.placement === 'hero');
+const heroSrc = hero ? hero.url ?? `/images/${hero.filename}` : null;
+
+const CONTENT_TYPE_LABELS: Record<string, string> = {
+	tool_intro: '自作ツール紹介',
+	case_study: '自社実装ログ',
+	news_analysis: 'ニュース解説',
+	opinion: 'オピニオン',
+};
+
+// 関連記事
+const allPosts = await getCollection('blog');
+const related = allPosts
+	.filter((p) => p.data.content_type === content_type && p.id !== currentSlug)
+	.sort((a, b) => b.data.published_date.valueOf() - a.data.published_date.valueOf())
+	.slice(0, 3);
+
+// TOC用：H2のみ抽出（最大10）
+const tocItems = headings.filter((h) => h.depth === 2).slice(0, 10);
+
+const pageUrl = Astro.url.href;
+const shareText = encodeURIComponent(`${title} | 不動産AIジャーナル`);
+const shareUrl = encodeURIComponent(pageUrl);
+
+// 読了時間（だいたい600字/分）
+import { render } from 'astro:content';
+---
+
+<html lang="ja">
+	<head>
+		<BaseHead title={title} description={meta_description} />
+		<style>
+			/* ヒーロー：白基調、画像は小さめ + タイトルは画像下に分離 */
+			.hero-wrap {
+				background: white;
+				border-bottom: 1px solid var(--border);
+			}
+			.hero-img {
+				width: 100%;
+				max-width: 920px;
+				max-height: 320px;
+				height: auto;
+				object-fit: cover;
+				display: block;
+				margin: 0 auto;
+				border-radius: 0;
+			}
+			.hero-inner {
+				max-width: 820px;
+				padding: 1.5em 1.5em 2em;
+				margin: 0 auto;
+				text-align: center;
+			}
+			.meta-row {
+				margin-bottom: 0.8em;
+			}
+			.badge {
+				display: inline-block;
+				padding: 5px 14px;
+				border-radius: 9999px;
+				background: var(--green);
+				color: white;
+				font-size: 0.82em;
+				font-weight: 700;
+				margin-right: 10px;
+				letter-spacing: 0.04em;
+			}
+			.date {
+				color: var(--text-muted);
+				font-size: 0.9em;
+			}
+			.hero-title {
+				color: var(--navy);
+				font-size: 1.8em;
+				line-height: 1.5;
+				margin: 0.3em 0 0.6em;
+				font-weight: 700;
+			}
+			.byline {
+				color: var(--text-muted);
+				font-size: 0.88em;
+			}
+
+			/* 記事本体コンテナ */
+			.article-body {
+				max-width: 820px;
+				margin: 0 auto;
+				padding: 0 1em;
+			}
+
+			/* 「この記事でわかること」ボックス */
+			.takeaways {
+				background: linear-gradient(135deg, #f0f7f4 0%, #e8f5ee 100%);
+				border: 2px solid var(--green);
+				border-radius: var(--radius);
+				padding: 1.5em 1.8em;
+				margin: 2em 0;
+				box-shadow: var(--shadow-sm);
+			}
+			.takeaways-title {
+				display: flex;
+				align-items: center;
+				gap: 0.5em;
+				color: var(--navy);
+				font-weight: 700;
+				font-size: 1.05em;
+				margin-bottom: 0.7em;
+			}
+			.takeaways-title::before {
+				content: '✓';
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				width: 1.6em;
+				height: 1.6em;
+				background: var(--green);
+				color: white;
+				border-radius: 50%;
+				font-weight: 700;
+				font-size: 0.9em;
+			}
+			.takeaways ul {
+				margin: 0;
+				padding-left: 1.4em;
+			}
+			.takeaways li {
+				margin: 0.3em 0;
+				color: var(--text);
+				font-size: 0.96em;
+			}
+
+			/* 目次（TOC） */
+			.toc {
+				background: white;
+				border: 1px solid var(--border);
+				border-left: 5px solid var(--navy);
+				border-radius: var(--radius-sm);
+				padding: 1.3em 1.6em;
+				margin: 2em 0;
+				box-shadow: var(--shadow-sm);
+			}
+			.toc-title {
+				color: var(--navy);
+				font-weight: 700;
+				font-size: 1em;
+				margin: 0 0 0.7em;
+				display: flex;
+				align-items: center;
+				gap: 0.4em;
+			}
+			.toc-title::before {
+				content: '📋';
+			}
+			.toc ol {
+				margin: 0;
+				padding-left: 1.6em;
+				color: var(--text);
+			}
+			.toc li {
+				margin: 0.35em 0;
+				font-size: 0.94em;
+			}
+			.toc a {
+				color: var(--text);
+				text-decoration: none;
+				border-bottom: 1px dashed transparent;
+				transition: 0.2s;
+			}
+			.toc a:hover {
+				color: var(--navy);
+				border-bottom-color: var(--green);
+			}
+			.toc li::marker {
+				color: var(--navy);
+				font-weight: 700;
+			}
+
+			/* 記事本文 .prose（global.css 連携） */
+			.prose {
+				padding: 1em 0 2em;
+			}
+
+			/* ========== 著者ボックス ========== */
+			.author-box {
+				margin: 3em auto 0;
+				padding: 1.5em;
+				background: white;
+				border-radius: var(--radius);
+				box-shadow: var(--shadow-sm);
+				border: 1px solid var(--border);
+				display: flex;
+				gap: 1.2em;
+				align-items: flex-start;
+			}
+			.author-avatar {
+				width: 64px;
+				height: 64px;
+				border-radius: 50%;
+				background: linear-gradient(135deg, var(--navy), var(--green));
+				color: white;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				font-weight: 700;
+				font-size: 1.2em;
+				flex-shrink: 0;
+			}
+			.author-info .label {
+				color: var(--text-muted);
+				font-size: 0.82em;
+				margin: 0;
+			}
+			.author-info .name {
+				color: var(--navy);
+				font-weight: 700;
+				font-size: 1em;
+				margin: 0.2em 0;
+			}
+			.author-info .bio {
+				margin: 0.4em 0 0;
+				font-size: 0.9em;
+				color: var(--text-soft);
+				line-height: 1.7;
+			}
+
+			/* シェアボタン */
+			.share-box {
+				margin: 2em auto 0;
+				padding: 1.3em;
+				background: white;
+				border-radius: var(--radius);
+				box-shadow: var(--shadow-sm);
+				text-align: center;
+				border: 1px solid var(--border);
+			}
+			.share-box .label {
+				color: var(--text-muted);
+				font-size: 0.9em;
+				margin-bottom: 0.8em;
+				font-weight: 600;
+			}
+			.share-buttons {
+				display: flex;
+				justify-content: center;
+				gap: 0.6em;
+				flex-wrap: wrap;
+			}
+			.share-btn {
+				display: inline-flex;
+				align-items: center;
+				padding: 0.55em 1.3em;
+				border-radius: 9999px;
+				color: white;
+				font-size: 0.88em;
+				font-weight: 700;
+				text-decoration: none;
+				transition: 0.2s;
+				border-bottom: none;
+			}
+			.share-btn:hover {
+				opacity: 0.88;
+				transform: translateY(-2px);
+				box-shadow: var(--shadow-md);
+			}
+			.share-x { background: #000; }
+			.share-fb { background: #1877f2; }
+			.share-line { background: #06c755; }
+			.share-hatena { background: #00a4de; }
+
+			/* CTAエリア（単色紺・上質感） */
+			.cta-box {
+				margin: 2.5em auto 0;
+				padding: 2.2em;
+				background: var(--navy);
+				color: white;
+				border-radius: var(--radius);
+				text-align: center;
+				box-shadow: var(--shadow-md);
+				border-top: 4px solid var(--green);
+			}
+			.cta-box h3 {
+				color: white;
+				margin: 0 0 0.6em;
+				font-size: 1.35em;
+				border: none;
+				padding: 0;
+			}
+			.cta-box h3::before { display: none; }
+			.cta-box p {
+				margin: 0.5em 0 1.3em;
+				font-size: 0.96em;
+				opacity: 0.96;
+			}
+			.cta-btn {
+				display: inline-block;
+				background: white;
+				color: var(--navy);
+				padding: 0.9em 2.2em;
+				border-radius: 9999px;
+				font-weight: 700;
+				text-decoration: none;
+				transition: 0.2s;
+				border-bottom: none;
+				box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+			}
+			.cta-btn:hover {
+				transform: translateY(-2px);
+				box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+			}
+
+			/* 関連記事 */
+			.related {
+				margin: 3em auto 0;
+			}
+			.related h3 {
+				color: var(--navy);
+				border-bottom: 3px solid var(--green);
+				padding-bottom: 0.5em;
+				margin-bottom: 1em;
+				font-size: 1.2em;
+			}
+			.related h3::before { display: none; }
+			.related-grid {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: 1em;
+			}
+			.related-card {
+				display: block;
+				padding: 1.2em;
+				background: white;
+				border-radius: var(--radius);
+				box-shadow: var(--shadow-sm);
+				border: 1px solid var(--border);
+				text-decoration: none;
+				color: inherit;
+				transition: 0.2s;
+			}
+			.related-card:hover {
+				transform: translateY(-3px);
+				box-shadow: var(--shadow-md);
+			}
+			.related-card .badge {
+				font-size: 0.72em;
+				padding: 3px 9px;
+				background: var(--navy);
+				margin-bottom: 0.5em;
+				display: inline-block;
+			}
+			.related-card h4 {
+				color: var(--navy);
+				margin: 0.3em 0 0.5em;
+				font-size: 1em;
+				line-height: 1.55;
+			}
+			.related-card p {
+				color: var(--text-soft);
+				font-size: 0.85em;
+				margin: 0;
+				line-height: 1.6;
+			}
+
+			@media (max-width: 720px) {
+				.hero-img { max-height: 200px; }
+				.hero-title { font-size: 1.3em; }
+				.article-body { padding: 0 0.5em; }
+				.takeaways, .toc { padding: 1.1em 1.2em; }
+				.related-grid { grid-template-columns: 1fr; }
+				.cta-box { padding: 1.5em 1.2em; }
+				.author-box { flex-direction: column; gap: 0.8em; }
+			}
+		</style>
+	</head>
+
+	<body>
+		<Header />
+		<main style="width:100%;max-width:100%;padding:0;">
+			<article>
+				<div class="hero-wrap">
+					{heroSrc && <img class="hero-img" src={heroSrc} alt={hero?.alt || title} />}
+					<div class="hero-inner">
+						<div class="meta-row">
+							<span class="badge">{CONTENT_TYPE_LABELS[content_type] ?? content_type}</span>
+							<span class="date"><FormattedDate date={published_date} /></span>
+						</div>
+						<h1 class="hero-title">{title}</h1>
+						<div class="byline">不動産AIジャーナル編集部</div>
+					</div>
+				</div>
+
+				<div class="article-body">
+					{tocItems.length >= 3 && (
+						<div class="takeaways">
+							<div class="takeaways-title">この記事でわかること</div>
+							<ul>
+								{tocItems.slice(0, 3).map((h) => <li>{h.text}</li>)}
+							</ul>
+						</div>
+					)}
+
+					{tocItems.length > 0 && (
+						<nav class="toc">
+							<div class="toc-title">目次</div>
+							<ol>
+								{tocItems.map((h) => (
+									<li><a href={`#${h.slug}`}>{h.text}</a></li>
+								))}
+							</ol>
+						</nav>
+					)}
+
+					<div class="prose">
+						<slot />
+					</div>
+
+					<div class="share-box">
+						<div class="label">この記事をシェア</div>
+						<div class="share-buttons">
+							<a class="share-btn share-x" href={`https://twitter.com/intent/tweet?text=${shareText}&url=${shareUrl}`} target="_blank" rel="noopener">X</a>
+							<a class="share-btn share-fb" href={`https://www.facebook.com/sharer/sharer.php?u=${shareUrl}`} target="_blank" rel="noopener">Facebook</a>
+							<a class="share-btn share-line" href={`https://social-plugins.line.me/lineit/share?url=${shareUrl}`} target="_blank" rel="noopener">LINE</a>
+							<a class="share-btn share-hatena" href={`https://b.hatena.ne.jp/entry/${pageUrl}`} target="_blank" rel="noopener">はてブ</a>
+						</div>
+					</div>
+
+					<div class="cta-box">
+						<h3>AIで業務を変えたい不動産会社の方へ</h3>
+						<p>Nectoでは、本記事のような実装支援を伴走型で行っています。「何から始めればいいか分からない」段階のご相談も歓迎です。</p>
+						<a class="cta-btn" href="https://necto.example.com/contact">無料相談はこちら</a>
+					</div>
+
+					{related.length > 0 && (
+						<div class="related">
+							<h3>同じカテゴリの記事</h3>
+							<div class="related-grid">
+								{related.map((post) => (
+									<a class="related-card" href={`/blog/${post.id}/`}>
+										<span class="badge">{CONTENT_TYPE_LABELS[post.data.content_type]}</span>
+										<h4>{post.data.title}</h4>
+										<p>{post.data.meta_description}</p>
+									</a>
+								))}
+							</div>
+						</div>
+					)}
+				</div>
+			</article>
+		</main>
+		<Footer />
+	</body>
+</html>

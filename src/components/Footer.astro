@@ -1,0 +1,119 @@
+---
+import { SITE_OPERATOR, SITE_OPERATOR_URL } from '../consts';
+const today = new Date();
+---
+
+<footer>
+	<div class="container">
+		<div class="grid">
+			<div>
+				<div class="brand-row">
+					<span class="brand-mark">不動産</span>
+					<span class="brand-name">AIジャーナル</span>
+				</div>
+				<p class="tagline">AIで不動産業務を変えた人たちの記録</p>
+			</div>
+			<div>
+				<h4>サイトメニュー</h4>
+				<ul>
+					<li><a href="/">ホーム</a></li>
+					<li><a href="/blog">記事一覧</a></li>
+					<li><a href="/about">このメディアについて</a></li>
+					<li><a href="/rss.xml">RSS</a></li>
+				</ul>
+			</div>
+			<div>
+				<h4>運営</h4>
+				<p>運営元：<a href={SITE_OPERATOR_URL}>{SITE_OPERATOR}</a></p>
+				<p>連絡先：hello.necto@gmail.com</p>
+			</div>
+		</div>
+		<div class="bottom">
+			<small>&copy; {today.getFullYear()} {SITE_OPERATOR}. All rights reserved.</small>
+		</div>
+	</div>
+</footer>
+<style>
+	footer {
+		background: #14233b;
+		color: #d8dee9;
+		padding: 3em 1em 1.5em;
+		margin-top: 4em;
+	}
+	.container {
+		max-width: var(--wide-width);
+		margin: 0 auto;
+	}
+	.grid {
+		display: grid;
+		grid-template-columns: 1.4fr 1fr 1.2fr;
+		gap: 2em;
+		margin-bottom: 2em;
+	}
+	.brand-row {
+		display: flex;
+		align-items: baseline;
+		gap: 0.3em;
+		margin-bottom: 0.5em;
+	}
+	.brand-mark {
+		background: var(--green);
+		color: white;
+		padding: 4px 9px;
+		border-radius: 6px;
+		font-size: 0.85em;
+		font-weight: 700;
+		letter-spacing: 0.04em;
+	}
+	.brand-name {
+		font-weight: 700;
+		color: white;
+		font-size: 1em;
+	}
+	.tagline {
+		color: #9aa5b8;
+		font-size: 0.9em;
+		margin: 0.3em 0 0;
+	}
+	h4 {
+		color: white;
+		font-size: 0.95em;
+		margin: 0 0 0.7em;
+		font-weight: 700;
+	}
+	ul {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+	}
+	ul li {
+		margin: 0.4em 0;
+	}
+	a {
+		color: #c8d3e3;
+		text-decoration: none;
+		font-size: 0.9em;
+		transition: color 0.2s;
+	}
+	a:hover {
+		color: var(--green);
+	}
+	p {
+		margin: 0.3em 0;
+		font-size: 0.9em;
+		color: #c8d3e3;
+	}
+	.bottom {
+		border-top: 1px solid #2c3e50;
+		padding-top: 1.2em;
+		text-align: center;
+		color: #7a8599;
+		font-size: 0.85em;
+	}
+	@media (max-width: 720px) {
+		.grid {
+			grid-template-columns: 1fr;
+			gap: 1.5em;
+		}
+	}
+</style>

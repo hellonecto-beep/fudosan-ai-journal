@@ -1,0 +1,71 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { SITE_DESCRIPTION, SITE_TITLE, SITE_OPERATOR, SITE_OPERATOR_URL } from '../consts';
+---
+
+<!doctype html>
+<html lang="ja">
+	<head>
+		<BaseHead title={`このメディアについて | ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
+		<style>
+			main {
+				width: 720px;
+				max-width: calc(100% - 2em);
+				margin: auto;
+				padding: 2em 1em;
+				line-height: 1.8;
+			}
+			h1 { color: #1F4E78; margin-bottom: 0.5em; }
+			h2 { color: #1F4E78; margin-top: 2em; border-bottom: 2px solid #27ae60; padding-bottom: 0.3em; }
+			.tagline { color: #7f8c8d; font-size: 1.1em; margin-bottom: 2em; }
+			.callout {
+				background: #f0f7f4;
+				border-left: 4px solid #27ae60;
+				padding: 1em 1.5em;
+				border-radius: 0 8px 8px 0;
+				margin: 1.5em 0;
+			}
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<h1>このメディアについて</h1>
+			<p class="tagline">AIで不動産業務を変えた人たちの記録</p>
+
+			<p>
+				「不動産AIジャーナル」は、不動産業界の現場で働く経営者・営業・事務員の方々に向けて、
+				AI技術が業務にどう生かせるのかを、わかりやすく翻訳して届けるメディアです。
+			</p>
+
+			<h2>編集方針</h2>
+			<ul>
+				<li><strong>現場目線の翻訳</strong>：専門用語は必ず噛み砕いて説明します</li>
+				<li><strong>実装ログの公開</strong>：理論より実例。実際に動いたものだけを取り上げます</li>
+				<li><strong>誇大表現を避ける</strong>：根拠のない「絶対」「必ず」は使いません</li>
+				<li><strong>失敗も共有する</strong>：成功事例だけでなく、つまずきや回り道も正直に書きます</li>
+			</ul>
+
+			<h2>取り上げる内容</h2>
+			<ul>
+				<li><strong>自作ツール紹介</strong>：実際に運用しているAIエージェントやツールの中身</li>
+				<li><strong>自社実装ログ</strong>：AI導入の試行錯誤、何を学んだか</li>
+				<li><strong>ニュース解説</strong>：AI業界の最新動向を不動産業務目線で読み解く</li>
+				<li><strong>オピニオン</strong>：業界の未来予測、変化の捉え方</li>
+			</ul>
+
+			<h2>運営元</h2>
+			<div class="callout">
+				<p>
+					本メディアは <a href={SITE_OPERATOR_URL}>{SITE_OPERATOR}</a>
+					が運営しています。Nectoは、不動産会社向けにAIを活用した業務効率化支援を行う企業です。
+					「AIで不動産業務を効率化したい」というご相談は、運営元までお気軽にお問い合わせください。
+				</p>
+				<p>連絡先：hello.necto@gmail.com</p>
+			</div>
+		</main>
+		<Footer />
+	</body>
+</html>

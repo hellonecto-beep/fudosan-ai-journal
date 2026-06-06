@@ -1,0 +1,97 @@
+---
+import { SITE_TITLE } from '../consts';
+import HeaderLink from './HeaderLink.astro';
+---
+
+<header>
+	<div class="container">
+		<a href="/" class="brand">
+			<span class="brand-mark">不動産</span>
+			<span class="brand-name">AIジャーナル</span>
+		</a>
+		<nav>
+			<HeaderLink href="/">ホーム</HeaderLink>
+			<HeaderLink href="/blog">記事一覧</HeaderLink>
+			<HeaderLink href="/about">このメディアについて</HeaderLink>
+		</nav>
+	</div>
+</header>
+<style>
+	header {
+		background: white;
+		box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+		position: sticky;
+		top: 0;
+		z-index: 100;
+	}
+	.container {
+		max-width: var(--wide-width);
+		margin: 0 auto;
+		padding: 0.7em 1.2em;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1em;
+	}
+	.brand {
+		display: flex;
+		align-items: baseline;
+		gap: 0.3em;
+		text-decoration: none;
+		color: var(--navy);
+		font-weight: 700;
+		font-size: 1.1em;
+	}
+	.brand-mark {
+		background: var(--navy);
+		color: white;
+		padding: 4px 9px;
+		border-radius: 6px;
+		font-size: 0.85em;
+		letter-spacing: 0.04em;
+	}
+	.brand-name {
+		font-size: 1em;
+		color: var(--navy);
+	}
+	nav {
+		display: flex;
+		gap: 0.3em;
+	}
+	nav a {
+		padding: 0.5em 0.9em;
+		color: var(--text);
+		font-size: 0.92em;
+		font-weight: 500;
+		border-bottom: 3px solid transparent;
+		text-decoration: none;
+		transition: 0.2s;
+	}
+	nav a:hover {
+		color: var(--navy);
+		border-bottom-color: var(--green);
+	}
+	nav a.active {
+		color: var(--navy);
+		border-bottom-color: var(--green);
+		font-weight: 700;
+	}
+	@media (max-width: 720px) {
+		.container {
+			flex-direction: column;
+			padding: 0.6em 1em;
+			gap: 0.3em;
+		}
+		nav {
+			width: 100%;
+			justify-content: center;
+		}
+		nav a {
+			padding: 0.4em 0.6em;
+			font-size: 0.85em;
+		}
+		.brand-name {
+			font-size: 0.95em;
+		}
+	}
+</style>

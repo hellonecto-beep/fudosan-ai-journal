@@ -1,0 +1,333 @@
+/*
+  不動産AIジャーナル — グローバルスタイル
+  読了率最優先。Xserverブログを参考に、日本語メディアらしい設計。
+*/
+
+:root {
+	/* Brand colors */
+	--navy: #1F4E78;
+	--navy-dark: #14385C;
+	--green: #27ae60;
+	--green-dark: #1f8a4c;
+	--orange: #f59e0b;
+	--accent: var(--green);
+	--accent-dark: var(--green-dark);
+
+	/* Surface colors */
+	--bg: #f8f9fb;
+	--card: #ffffff;
+	--text: #2c3e50;
+	--text-soft: #4a5568;
+	--text-muted: #7f8c8d;
+	--border: #e8edf3;
+	--highlight: rgba(39, 174, 96, 0.18);
+
+	/* Shadow */
+	--shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+	--shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+	--shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.10);
+
+	/* Layout */
+	--radius: 12px;
+	--radius-sm: 8px;
+	--content-width: 760px;
+	--wide-width: 1080px;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+body {
+	font-family: 'Hiragino Kaku Gothic ProN', 'Yu Gothic', 'YuGothic', 'Meiryo', 'Hiragino Sans', sans-serif;
+	margin: 0;
+	padding: 0;
+	background: var(--bg);
+	color: var(--text);
+	font-size: 16px;
+	line-height: 1.9;
+	-webkit-font-smoothing: antialiased;
+	word-wrap: break-word;
+	overflow-wrap: break-word;
+}
+
+main {
+	width: var(--content-width);
+	max-width: calc(100% - 2em);
+	margin: 0 auto;
+	padding: 2em 1em 4em;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	color: var(--navy);
+	line-height: 1.4;
+	font-weight: 700;
+}
+
+a {
+	color: var(--green-dark);
+	text-decoration: none;
+	transition: color 0.2s, background-color 0.2s;
+}
+
+a:hover {
+	color: var(--navy);
+}
+
+strong, b {
+	font-weight: 700;
+}
+
+img {
+	max-width: 100%;
+	height: auto;
+}
+
+/* =========================
+   .prose : 記事本文専用スタイル
+   ========================= */
+
+.prose {
+	font-size: 17px;
+	line-height: 1.95;
+	color: var(--text);
+}
+
+.prose > p {
+	margin: 1.4em 0;
+}
+
+/* 強調：マーカー風グラデーション */
+.prose strong {
+	color: var(--navy);
+	background: linear-gradient(transparent 65%, var(--highlight) 65%);
+	padding: 0 2px;
+	font-weight: 700;
+}
+
+/* リード文（最初のp） */
+.prose > p:first-of-type {
+	font-size: 1.05em;
+	color: var(--text-soft);
+	border-left: 4px solid var(--green);
+	padding: 0.5em 0 0.5em 1.2em;
+	background: rgba(39, 174, 96, 0.04);
+	border-radius: 0 8px 8px 0;
+}
+
+/* H2：背景色＋左罫線（Xserver風） */
+.prose h2 {
+	background: #f1f5f9;
+	border-left: 6px solid var(--navy);
+	border-radius: 0 6px 6px 0;
+	padding: 0.85em 1.2em;
+	margin: 3em 0 1.2em;
+	font-size: 1.55em;
+	color: var(--navy);
+}
+
+/* H3：アクセントカラー罫線 */
+.prose h3 {
+	position: relative;
+	padding-left: 0.9em;
+	margin: 2.2em 0 0.8em;
+	font-size: 1.25em;
+	color: var(--navy);
+	border-bottom: 2px solid var(--green);
+	padding-bottom: 0.3em;
+}
+
+.prose h3::before {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 0.35em;
+	bottom: 0.45em;
+	width: 5px;
+	background: var(--green);
+	border-radius: 2px;
+}
+
+.prose h4 {
+	margin: 1.8em 0 0.5em;
+	font-size: 1.1em;
+	color: var(--navy-dark);
+}
+
+/* リスト */
+.prose ul, .prose ol {
+	margin: 1.2em 0;
+	padding-left: 1.6em;
+}
+
+.prose li {
+	margin: 0.5em 0;
+}
+
+.prose ul li::marker {
+	color: var(--green);
+}
+
+.prose ol li::marker {
+	color: var(--navy);
+	font-weight: 700;
+}
+
+/* リンク */
+.prose a {
+	color: var(--green-dark);
+	border-bottom: 1px solid var(--green);
+	font-weight: 500;
+}
+
+.prose a:hover {
+	background: rgba(39, 174, 96, 0.08);
+	color: var(--navy);
+}
+
+/* 画像：影＋角丸 */
+.prose img {
+	display: block;
+	margin: 2em auto;
+	border-radius: var(--radius);
+	box-shadow: var(--shadow-md);
+	max-width: 100%;
+	height: auto;
+}
+
+/* 引用 */
+.prose blockquote {
+	background: #fff8e1;
+	border-left: 5px solid var(--orange);
+	padding: 1em 1.4em;
+	margin: 1.8em 0;
+	border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+	color: var(--text-soft);
+	font-size: 0.98em;
+	box-shadow: var(--shadow-sm);
+}
+
+.prose blockquote p {
+	margin: 0.4em 0;
+}
+
+/* インラインコード */
+.prose code {
+	background: #f1f5f9;
+	color: #c0392b;
+	padding: 2px 7px;
+	border-radius: 4px;
+	font-size: 0.92em;
+	font-family: 'SFMono-Regular', 'Consolas', 'Liberation Mono', Menlo, monospace;
+}
+
+/* コードブロック */
+.prose pre {
+	background: #1e293b;
+	color: #e2e8f0;
+	padding: 1.3em;
+	border-radius: var(--radius-sm);
+	overflow-x: auto;
+	margin: 1.8em 0;
+	font-size: 0.9em;
+	box-shadow: var(--shadow-md);
+}
+
+.prose pre code {
+	background: transparent;
+	color: inherit;
+	padding: 0;
+	font-size: inherit;
+}
+
+/* テーブル */
+.prose table {
+	width: 100%;
+	border-collapse: collapse;
+	margin: 1.8em 0;
+	box-shadow: var(--shadow-sm);
+	border-radius: var(--radius-sm);
+	overflow: hidden;
+	font-size: 0.95em;
+}
+
+.prose thead th {
+	background: var(--navy);
+	color: white;
+	padding: 0.9em 1em;
+	text-align: left;
+	font-weight: 700;
+}
+
+.prose tbody td {
+	padding: 0.85em 1em;
+	border-bottom: 1px solid var(--border);
+	background: white;
+}
+
+.prose tbody tr:hover td {
+	background: #f8f9fb;
+}
+
+.prose tbody tr:last-child td {
+	border-bottom: none;
+}
+
+/* 水平線 */
+.prose hr {
+	border: none;
+	height: 2px;
+	background: linear-gradient(90deg, transparent, var(--green), transparent);
+	margin: 3em 0;
+}
+
+/* Mermaid（CSSで最低限の見栄えを確保。レンダリング自体は別途） */
+.prose .mermaid {
+	background: white;
+	padding: 1.5em;
+	border-radius: var(--radius);
+	box-shadow: var(--shadow-sm);
+	text-align: center;
+	margin: 2em 0;
+}
+
+/* =========================
+   ユーティリティ
+   ========================= */
+
+.sr-only {
+	border: 0;
+	padding: 0;
+	margin: 0;
+	position: absolute !important;
+	height: 1px;
+	width: 1px;
+	overflow: hidden;
+	clip: rect(1px, 1px, 1px, 1px);
+	clip-path: inset(50%);
+	white-space: nowrap;
+}
+
+@media (max-width: 720px) {
+	body {
+		font-size: 16px;
+	}
+	.prose {
+		font-size: 16px;
+		line-height: 1.85;
+	}
+	.prose h2 {
+		font-size: 1.35em;
+		padding: 0.7em 0.9em;
+	}
+	.prose h3 {
+		font-size: 1.15em;
+	}
+	main {
+		padding: 1em;
+	}
+}
