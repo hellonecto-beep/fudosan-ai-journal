@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://fudosan-ai-journal.com/sitemap-index.xml
