@@ -35,7 +35,7 @@ const CONTENT_TYPE_LABELS: Record<string, string> = {
 };
 
 // 関連記事
-const allPosts = await getCollection('blog');
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
 const related = allPosts
 	.filter((p) => p.data.content_type === content_type && p.id !== currentSlug)
 	.sort((a, b) => b.data.published_date.valueOf() - a.data.published_date.valueOf())

@@ -17,6 +17,9 @@ const blog = defineCollection({
 		supervisor: z.string().optional(),
 		published_date: z.coerce.date(),
 		schema_type: z.enum(['Article', 'FAQPage', 'HowTo']).default('Article'),
+		// 公開待ち記事: draft=true は一覧・記事ページ・RSSから除外される。
+		// GitHub Actionsの daily-publish ワークフローが毎日9:00 JSTに最古のdraftをfalse化して公開する。
+		draft: z.boolean().default(false),
 		internal_links: z
 			.array(
 				z.object({
