@@ -6,7 +6,7 @@ content_type: "case_study"
 target_keyword: "メディア 立ち上げ 実装"
 sub_keywords: ["Astro 静的サイト", "Cloudflare Pages", "オウンドメディア 立ち上げ方"]
 author: "不動産AIジャーナル編集部"
-published_date: "2026-06-09"
+published_date: "2026-06-10"
 schema_type: "Article"
 internal_links:
   - anchor: "Nectoの不動産AI業務効率化サービス"
@@ -22,7 +22,7 @@ images:
     alt: "ノートPCの画面にコードエディタが映り、サイト立ち上げ作業の最中を表すデスクの様子"
 image_alt:
   - "ノートPCの画面にコードエディタが映り、サイト立ち上げ作業の最中を表すデスクの様子"
-draft: true
+draft: false
 ---
 
 # 72時間でメディアをゼロから立ち上げた実装ログ
