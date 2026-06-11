@@ -6,7 +6,7 @@ content_type: "news_analysis"
 target_keyword: "Claude Fable 5"
 sub_keywords: ["Claude 不動産", "Anthropic 新モデル", "AI 業務効率化", "Claude Opus 4.8"]
 author: "不動産AIジャーナル編集部"
-published_date: "2026-06-08"
+published_date: "2026-06-11"
 schema_type: "Article"
 internal_links:
   - anchor: "Nectoの不動産AI業務効率化サービス"
@@ -22,7 +22,7 @@ images:
     alt: "Anthropic Claude の新モデル登場を象徴する、青系のデジタルインターフェースのイメージ"
 image_alt:
   - "Anthropic Claude の新モデル登場を象徴する、青系のデジタルインターフェースのイメージ"
-draft: true
+draft: false
 ---
 
 # Claude Fable 5登場、不動産業務で活きる新機能
