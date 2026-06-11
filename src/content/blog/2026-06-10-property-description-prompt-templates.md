@@ -6,7 +6,7 @@ content_type: "tool_intro"
 target_keyword: "物件紹介文 AI プロンプト"
 sub_keywords: ["不動産 ChatGPT", "物件紹介文 自動生成", "不動産 業務効率化"]
 author: "不動産AIジャーナル編集部"
-published_date: "2026-06-10"
+published_date: "2026-06-11"
 schema_type: "HowTo"
 internal_links:
   - anchor: "Nectoの不動産AI業務効率化サービス"
@@ -22,7 +22,7 @@ images:
     alt: "デスクの上でノートPCに向かい、物件紹介文を書いている様子を表すワークデスクのイメージ"
 image_alt:
   - "デスクの上でノートPCに向かい、物件紹介文を書いている様子を表すワークデスクのイメージ"
-draft: true
+draft: false
 ---
 
 # 物件紹介文を5分で書くAIプロンプト集（5パターン）
