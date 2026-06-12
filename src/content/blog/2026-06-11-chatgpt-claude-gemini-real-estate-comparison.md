@@ -6,7 +6,7 @@ content_type: "news_analysis"
 target_keyword: "ChatGPT Claude Gemini 比較"
 sub_keywords: ["不動産 AI 比較", "AI ツール 選び方", "PropTech AI"]
 author: "不動産AIジャーナル編集部"
-published_date: "2026-06-11"
+published_date: "2026-06-12"
 schema_type: "Article"
 internal_links:
   - anchor: "Nectoの不動産AI業務効率化サービス"
@@ -22,7 +22,7 @@ images:
     alt: "複数のAIサービスを比較検討する様子を表す、抽象的なデジタルインターフェースのイメージ"
 image_alt:
   - "複数のAIサービスを比較検討する様子を表す、抽象的なデジタルインターフェースのイメージ"
-draft: true
+draft: false
 ---
 
 # 3大AIを不動産業務で使い分ける早見表
