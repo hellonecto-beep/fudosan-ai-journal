@@ -6,7 +6,7 @@ content_type: "tool_intro"
 target_keyword: "賃貸 問い合わせ AI 自動化"
 sub_keywords: ["不動産 一次対応 自動化", "反響対応 AI", "賃貸 即レス"]
 author: "不動産AIジャーナル編集部"
-published_date: "2026-06-12"
+published_date: "2026-07-05"
 schema_type: "HowTo"
 internal_links:
   - anchor: "Nectoの不動産AI業務効率化サービス"
@@ -22,7 +22,7 @@ images:
     alt: "デスクでノートPCに向かい、問い合わせメールへの返信を作成している様子"
 image_alt:
   - "デスクでノートPCに向かい、問い合わせメールへの返信を作成している様子"
-draft: true
+draft: false
 ---
 
 # 賃貸の問い合わせ対応をAIで自動化する方法
