@@ -6,7 +6,7 @@ content_type: "opinion"
 target_keyword: "不動産 事務 AI"
 sub_keywords: ["事務職 AI 代替", "不動産 業務効率化", "AI 仕事なくなる"]
 author: "不動産AIジャーナル編集部"
-published_date: "2026-06-13"
+published_date: "2026-07-07"
 schema_type: "Article"
 internal_links:
   - anchor: "Nectoの不動産AI業務効率化サービス"
@@ -22,7 +22,7 @@ images:
     alt: "少人数のオフィスで事務作業をしながら働く様子を表すワークシーンのイメージ"
 image_alt:
   - "少人数のオフィスで事務作業をしながら働く様子を表すワークシーンのイメージ"
-draft: true
+draft: false
 ---
 
 # 不動産事務の仕事はAIでなくなるのか
