@@ -6,7 +6,7 @@ content_type: "tool_intro"
 target_keyword: "重要事項説明書 AI チェック"
 sub_keywords: ["重説 AI", "契約書 レビュー AI", "不動産 書類チェック"]
 author: "不動産AIジャーナル編集部"
-published_date: "2026-06-14"
+published_date: "2026-07-09"
 schema_type: "HowTo"
 internal_links:
   - anchor: "Nectoの不動産AI業務効率化サービス"
@@ -22,7 +22,7 @@ images:
     alt: "PC画面で書類を確認しながら重要事項説明書をチェックしている作業デスクの様子"
 image_alt:
   - "PC画面で書類を確認しながら重要事項説明書をチェックしている作業デスクの様子"
-draft: true
+draft: false
 ---
 
 # 重要事項説明書をAIで下読みする実践手順
