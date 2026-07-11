@@ -6,7 +6,7 @@ content_type: "news_analysis"
 target_keyword: "不動産 AI トレンド 2026"
 sub_keywords: ["PropTech 2026", "不動産DX 最新", "不動産テック トレンド"]
 author: "不動産AIジャーナル編集部"
-published_date: "2026-06-15"
+published_date: "2026-07-11"
 schema_type: "Article"
 internal_links:
   - anchor: "Nectoの不動産AI業務効率化サービス"
@@ -22,7 +22,7 @@ images:
     alt: "最新の不動産テックトレンドを象徴する、青系のデジタルデータのイメージ"
 image_alt:
   - "最新の不動産テックトレンドを象徴する、青系のデジタルデータのイメージ"
-draft: true
+draft: false
 ---
 
 # 2026年注目の不動産AIトレンド5選
